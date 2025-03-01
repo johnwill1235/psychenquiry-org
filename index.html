@@ -4,17 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Indefinite Postponement</title>
+    <!-- Montserrat font from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Adding AOS (Animate On Scroll) library -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Montserrat', sans-serif;
         }
         
         body {
             background-color: #f5f1e8;
-            color: #333;
+            color: #2c2c2c;
             line-height: 1.6;
         }
         
@@ -24,12 +30,13 @@
         }
         
         .logo {
-            font-size: 24px;
+            font-size: 26px;
             font-weight: 500;
-            color: #444;
+            color: #333;
             text-decoration: none;
             margin-bottom: 10px;
             display: block;
+            letter-spacing: 1px;
         }
         
         nav {
@@ -43,6 +50,11 @@
             text-decoration: none;
             color: #444;
             font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover {
+            color: #777;
         }
         
         .container {
@@ -57,15 +69,19 @@
             justify-content: space-between;
             padding: 40px 0;
             flex-wrap: wrap;
+            position: relative;
         }
         
         .hero-content {
             flex: 1;
             min-width: 300px;
             background-color: #282433;
-            color: white;
+            color: #f0f0f0;
             padding: 40px;
             border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
         }
         
         .hero-image {
@@ -73,43 +89,59 @@
             min-width: 300px;
             max-width: 500px;
             padding: 20px;
+            margin-left: -5%; /* Creates overlap effect */
+            position: relative;
+            z-index: 1;
         }
         
         .hero-image img {
             width: 100%;
             height: auto;
             border-radius: 8px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            transition: transform 0.5s ease;
+        }
+        
+        .hero-image img:hover {
+            transform: scale(1.02);
         }
         
         .hero-content h1 {
             font-size: 32px;
             margin-bottom: 20px;
+            font-weight: 600;
         }
         
         .hero-content p {
             margin-bottom: 20px;
+            line-height: 1.7;
         }
         
         .button {
             display: inline-block;
-            background-color: white;
+            background-color: #f0f0f0;
             color: #282433;
-            padding: 10px 25px;
+            padding: 12px 28px;
             border-radius: 4px;
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
         
         .button:hover {
-            background-color: #f0f0f0;
-            transform: translateY(-2px);
+            background-color: #e5e5e5;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
         }
         
         .author {
             display: flex;
             align-items: center;
-            padding: 60px 0;
+            padding: 80px 0;
             flex-wrap: wrap;
         }
         
@@ -122,7 +154,13 @@
         .author-image img {
             width: 100%;
             height: auto;
-            border-radius: 8px;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.5s ease;
+        }
+        
+        .author-image img:hover {
+            transform: scale(1.03);
         }
         
         .author-content {
@@ -134,55 +172,76 @@
         .author-content h2 {
             font-size: 32px;
             margin-bottom: 15px;
+            font-weight: 600;
+            color: #333;
         }
         
         .author-title {
             font-size: 18px;
-            color: #666;
+            color: #555;
             margin-bottom: 20px;
+            font-weight: 500;
         }
         
         .testimonials {
-            padding: 60px 0;
+            padding: 80px 0;
         }
         
         .testimonials h2 {
             font-size: 32px;
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
+            font-weight: 600;
+            color: #333;
         }
         
         .testimonial-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 30px;
             justify-content: space-between;
         }
         
         .testimonial {
             flex: 1 0 45%;
             background-color: #f1ede4;
-            padding: 30px;
-            border-radius: 8px;
+            padding: 35px;
+            border-radius: 10px;
             min-width: 300px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .testimonial:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
         }
         
         .testimonial-name {
             font-weight: 600;
             font-size: 18px;
             margin-bottom: 15px;
+            color: #333;
         }
         
         .testimonial p {
             font-style: italic;
+            color: #444;
+            line-height: 1.7;
         }
         
         footer {
             background-color: #282433;
-            color: white;
+            color: #f0f0f0;
             text-align: center;
             padding: 30px 0;
             margin-top: 40px;
+        }
+        
+        @media (max-width: 992px) {
+            .hero-image {
+                margin-left: 0;
+            }
         }
         
         @media (max-width: 768px) {
@@ -193,6 +252,10 @@
             .hero-image, .author-image {
                 margin: 20px auto;
                 max-width: 400px;
+            }
+            
+            .hero {
+                flex-direction: column-reverse;
             }
         }
     </style>
@@ -209,22 +272,22 @@
 
     <main>
         <section class="hero container" id="home">
-            <div class="hero-content">
+            <div class="hero-content" data-aos="fade-right" data-aos-duration="1000">
                 <h1>About the book</h1>
                 <p>Indefinite Postponement combines the suicide-recovery diary of a patient named Grace with the commentary of the psychiatrist John Williams and presents a unique case study of a young woman who descended into illness and found her way back.</p>
                 <p>Through candid storytelling and professional insights, this book delves deep into the complexities of adolescent mental health, offering hope and understanding to those affected by suicidality.</p>
                 <a href="#" class="button">Buy Now</a>
             </div>
-            <div class="hero-image">
+            <div class="hero-image" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
                 <img src="book.jpg" alt="Indefinite Postponement Book Cover" />
             </div>
         </section>
 
         <section class="author container">
-            <div class="author-image">
+            <div class="author-image" data-aos="fade-right" data-aos-duration="1000">
                 <img src="author.jpg" alt="Dr. John P. Williams" />
             </div>
-            <div class="author-content">
+            <div class="author-content" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
                 <h2>About the author</h2>
                 <p class="author-title">John P. Williams, MD<br>Child, Adolescent, and Adult Psychiatrist</p>
                 <p>Dr. John P. Williams is a renowned psychiatrist specializing in child, adolescent, and adult mental health. Based in the Philadelphia area, he has dedicated his career to understanding and treating complex mental health issues, including adolescent suicidality. His compassionate approach and insightful methodologies are vividly portrayed in his latest book, "Indefinite Postponement," which offers a profound look into the journey of recovery and resilience.</p>
@@ -232,13 +295,13 @@
         </section>
 
         <section class="testimonials container">
-            <h2>What Readers Are Saying</h2>
+            <h2 data-aos="fade-up" data-aos-duration="1000">What Readers Are Saying</h2>
             <div class="testimonial-grid">
-                <div class="testimonial">
+                <div class="testimonial" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
                     <div class="testimonial-name">Meredith Anne Phillips</div>
                     <p>"This book sheds much-needed light on the epidemic of suicide--the incidence of which has risen sharply even as physical illnesses such as cancer have become less frequent. Through clear, candid prose, Dr. Williams details his treatment plan with one of his most challenging patients, a high school student who came to him after nine months of contemplating suicide, and whom he gingerly convinces to put off her plans. An excellent read for anyone whose life has touched suicide, as survivor, therapist, friend or relative."</p>
                 </div>
-                <div class="testimonial">
+                <div class="testimonial" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
                     <div class="testimonial-name">Maudie White</div>
                     <p>"This groundbreaking work captures the difficult journey through suicidality for both patient and doctor. Grace's ability to narrate her story, followed by the doctor's insight, is riveting. Seeing the transformation in Grace through her writings while in recovery is the very essence of hope. This book shows how there is a path to recovery for anyone suffering and guidance to medical professionals."</p>
                 </div>
@@ -251,5 +314,18 @@
             <p>&copy; 2025, Indefinite Postponement Powered by Shopify</p>
         </div>
     </footer>
+
+    <!-- AOS (Animate On Scroll) script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                once: true,
+                offset: 120,
+                duration: 800,
+                easing: 'ease-in-out'
+            });
+        });
+    </script>
 </body>
 </html>
